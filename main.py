@@ -76,7 +76,7 @@ def handle_webhook():
     new_total = round(current_total + current_duration, 2)
 
     # 3. Обчислення середньої тривалості
-    avg_duration = round(new_total / iteration_count, 2)
+    avg_duration = round((new_total / iteration_count) * 2) / 2
 
     # Підготовка оновлення в Jira
     url = f"{JIRA_BASE_URL}/rest/api/3/issue/{issue_key}"
