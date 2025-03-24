@@ -100,9 +100,6 @@ def handle_webhook():
     else:
         return jsonify({"error": "Jira update failed", "details": response.text}), 500
 
-@app.route("/")
-def health():
-    return "✅ Script is running", 200
 
 @app.route("/webhook", methods=["POST"])
 def handle_webhook():
