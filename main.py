@@ -54,8 +54,8 @@ def handle_webhook():
 
     start_str = fields.get("customfield_10039")
     end_str = fields.get("customfield_10040")
-    current_total = fields.get(FIELD_TOTAL_DURATION) or 0
-    iteration_count = fields.get(FIELD_ITERATION_COUNT) or 1
+    current_total = float(fields.get(FIELD_TOTAL_DURATION) or 0)
+    iteration_count = float(fields.get(FIELD_ITERATION_COUNT) or 1)
 
     print("Raw Start:", start_str)
     print("Raw End:", end_str)
