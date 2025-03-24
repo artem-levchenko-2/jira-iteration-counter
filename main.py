@@ -101,11 +101,6 @@ def handle_webhook():
         return jsonify({"error": "Jira update failed", "details": response.text}), 500
 
 
-@app.route("/webhook", methods=["POST"])
-def handle_webhook():
-    # твоя логіка
-    return jsonify({"status": "ok"}), 200
-
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8080))
     app.run(host="0.0.0.0", port=port)
