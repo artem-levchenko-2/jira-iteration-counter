@@ -104,5 +104,10 @@ def handle_webhook():
 def health():
     return "✅ Script is running", 200
 
+@app.route("/webhook", methods=["POST"])
+def handle_webhook():
+    # твоя логіка
+    return jsonify({"status": "ok"}), 200
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
