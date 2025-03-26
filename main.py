@@ -62,12 +62,19 @@ def handle_webhook():
     print("Raw Start:", start_str)
     print("Raw End:", end_str)
 
+    print("🧪 DEBUG START")
+    print("Start (raw):", repr(fields.get(FIELD_START_TIME)))
+    print("End   (raw):", repr(fields.get(FIELD_END_TIME)))
+    print("🧪 DEBUG END")
+
     if not start_str or not end_str:
         return jsonify({"error": "Missing start or end time"}), 400
 
     try:
         start_time = parser.parse(start_str)
         end_time = parser.parse(end_str)
+        print("Parsed Start:", start_time)
+        print("Parsed End:", end_time)
     except Exception as e:
         return jsonify({"error": "Date parsing failed", "details": str(e)}), 400
 
