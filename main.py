@@ -11,11 +11,13 @@ JIRA_BASE_URL = os.environ.get("JIRA_BASE_URL")
 JIRA_EMAIL = os.environ.get("JIRA_EMAIL")
 JIRA_API_TOKEN = os.environ.get("JIRA_API_TOKEN")
 
-# Custom field IDs
-FIELD_CURRENT_DURATION = "customfield_10041"
-FIELD_ITERATION_COUNT = "customfield_10042"
-FIELD_TOTAL_DURATION = "customfield_10043"
-FIELD_AVG_DURATION = "customfield_10044"
+# Custom field IDs (оновлені)
+FIELD_START_TIME = "customfield_10752"
+FIELD_END_TIME = "customfield_10753"
+FIELD_ITERATION_COUNT = "customfield_10751"
+FIELD_CURRENT_DURATION = "customfield_10754"
+FIELD_TOTAL_DURATION = "customfield_10755"
+FIELD_AVG_DURATION = "customfield_10756"
 
 # === Розрахунок: до 14:00 = 0.5, після 14:00 = 1.0 дня ===
 def calculate_iteration_days(start_time: datetime, end_time: datetime) -> float:
@@ -52,8 +54,8 @@ def handle_webhook():
     issue_key = data["issue"]["key"]
     fields = data["issue"]["fields"]
 
-    start_str = fields.get("customfield_10039")
-    end_str = fields.get("customfield_10040")
+    start_str = fields.get(FIELD_START_TIME)
+    end_str = fields.get(FIELD_END_TIME)
     current_total = float(fields.get(FIELD_TOTAL_DURATION) or 0)
     iteration_count = float(fields.get(FIELD_ITERATION_COUNT) or 1)
 
@@ -99,7 +101,6 @@ def handle_webhook():
         return jsonify({"status": "success", "duration": current_duration}), 200
     else:
         return jsonify({"error": "Jira update failed", "details": response.text}), 500
-
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8080))
